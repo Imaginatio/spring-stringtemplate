@@ -1,4 +1,7 @@
 *.iws
 build
 out
-target/*
+target
+.classpath
+.project
+.settings
