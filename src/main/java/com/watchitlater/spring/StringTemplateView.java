@@ -76,6 +76,7 @@ public class StringTemplateView implements View {
         exposeRequestContext(request, response, model);
 
         response.setContentType(getContentType());
+
         template.write(response.getWriter(), autoIndent);
     }
 

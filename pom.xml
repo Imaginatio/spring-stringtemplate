@@ -3,7 +3,7 @@
   <groupId>com.watchilater</groupId>
   <artifactId>spring-stringtemplate</artifactId>
   <packaging>jar</packaging>
-  <version>1.2</version>
+  <version>1.4</version>
   <dependencies>
   	<dependency>
   		<groupId>antlr</groupId>

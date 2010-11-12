@@ -21,13 +21,13 @@ public class StringTemplateViewResolver implements ViewResolver, ResourceLoaderA
     // WebStringTemplateGroup
 
     protected Map<String, WebStringTemplateGroup> groupCache = new ConcurrentHashMap<String, WebStringTemplateGroup>();
+    protected Integer refreshIntervalInSeconds;
     protected boolean useGroupCache = false;
 
     protected StringTemplateErrorListener templateErrorListener;
-    protected Integer refreshIntervalInSeconds;
-    protected String sourceFileCharEncoding;
 
     protected ResourceLoader resourceLoader;
+    protected String sourceFileCharEncoding;
     protected String templateRoot = "";
     protected String sharedRoot;
 
@@ -167,12 +167,16 @@ public class StringTemplateViewResolver implements ViewResolver, ResourceLoaderA
     }
 
     protected WebStringTemplateGroup createGroup() {
-        WebStringTemplateGroup group = new WebStringTemplateGroup("main", templateRoot, resourceLoader);
+        WebStringTemplateGroup group = createGroup("main", templateRoot);
         if (sharedRoot != null) {
-            WebStringTemplateGroup shared = new WebStringTemplateGroup("shared", sharedRoot, resourceLoader);
+            WebStringTemplateGroup shared = createGroup("shared", sharedRoot);
             group.setSuperGroup(shared);
-            initGroup(shared);
         }
+        return group;
+    }
+
+    protected WebStringTemplateGroup createGroup(String groupName, String groupRoot) {
+        WebStringTemplateGroup group = new WebStringTemplateGroup(groupName, groupRoot, resourceLoader);
         initGroup(group);
         return group;
     }
